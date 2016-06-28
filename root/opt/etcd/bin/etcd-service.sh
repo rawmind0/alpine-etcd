@@ -11,7 +11,7 @@ function log {
 
 function serviceDefault {
     log "[ Applying default ${SERVICE_NAME} configuration... ]"
-    ${SERVICE_HOME}/bin/etcd-env.sh
+    ${SERVICE_HOME}/bin/etcd-source.sh
 }
 
 function serviceConf {
@@ -45,24 +45,33 @@ function serviceStart {
     log "[ Starting ${SERVICE_NAME}... ]"
     serviceCheck
     serviceLog
-    nohup ${SERVICE_HOME}/bin/etcd > ${SERVICE_LOG_FILE} &
+    nohup ${SERVICE_HOME}/bin/etcd &> ${SERVICE_LOG_FILE} &
     echo $! > ${SERVICE_PID_FILE}
 }
 
 function serviceStop {
     log "[ Stoping ${SERVICE_NAME}... ]"
-    pid=$(cat ${SERVICE_PID_FILE})
-    kill -SIGTERM $pid
-    sleep 2
 
-    killed=$(ps -ef | grep -w $pid | grep -v grep)
-    while [ $killed -ne 1 ]; do
+    if [ -f ${SERVICE_PID_FILE} ]; then
+        pid=$(cat ${SERVICE_PID_FILE})
+        rm ${SERVICE_PID_FILE}
+    else 
+        pid=$(ps -ef | grep -w ${SERVICE_HOME}'/bin/etcd' | grep -v grep | awk '{print $1}')
+    fi
+
+    if [ "x$pid" != "x" ]; then 
         kill -SIGTERM $pid
         sleep 2
-        killed=$(ps -ef | grep -w $pid | grep -v grep)
-    done
-    rm ${SERVICE_PID_FILE}
+
+        killed=$(ps -ef | grep -w $pid | grep -v grep ; echo $?)
+        while [ $killed -ne 1 ]; do
+            kill -SIGTERM $pid
+            sleep 2
+            killed=$(ps -ef | grep -w $pid | grep -v grep ; echo $?)
+        done
+    fi
 }
+
 
 function serviceRestart {
     log "[ Restarting ${SERVICE_NAME}... ]"
