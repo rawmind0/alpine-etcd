@@ -25,7 +25,7 @@ Besides, you can customize the configuration in several ways:
 Etcd is installed with the default configuration and some parameters can be overrided with env variables:
 
 - ETCD_ADVERTISE_CLIENT_URLS=${ETCD_ADVERTISE_CLIENT_URLS:-"http://localhost:2379"}
-- ETCD_DATA_DIR=${ETCD_DATA_DIR:-"data"}
+- ETCD_DATA_DIR=${ETCD_DATA_DIR:-${SERVICE_HOME}"/data"}
 - ETCD_INITIAL_ADVERTISE_PEER_URLS=${ETCD_INITIAL_ADVERTISE_PEER_URLS:-http://localhost:2380}
 - ETCD_INITIAL_CLUSTER=${ETCD_INITIAL_CLUSTER:-"local=http://localhost:2380"}
 - ETCD_INITIAL_CLUSTER_STATE=${ETCD_INITIAL_CLUSTER_STATE:-"new"}
