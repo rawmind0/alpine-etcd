@@ -28,6 +28,11 @@ function serviceLog {
         rm ${SERVICE_LOG_FILE}
         ln -sf ${SERVICE_STDOUT} ${SERVICE_LOG_FILE}
     fi
+
+    if [ ! -L ${SERVICE_HOME}/nohup.out ]; then
+        rm ${SERVICE_HOME}/nohup.out
+        ln -sf ${SERVICE_STDOUT} ${SERVICE_HOME}/nohup.out
+    fi
 }
 
 function serviceCheck {
@@ -45,7 +50,7 @@ function serviceStart {
     log "[ Starting ${SERVICE_NAME}... ]"
     serviceCheck
     serviceLog
-    nohup ${SERVICE_HOME}/bin/etcd &> ${SERVICE_LOG_FILE} &
+    nohup ${SERVICE_HOME}/bin/etcd &
     echo $! > ${SERVICE_PID_FILE}
 }
 
@@ -82,13 +87,13 @@ function serviceRestart {
 
 case "$1" in
         "start")
-            serviceStart >> ${SERVICE_STDOUT}
+            serviceStart &> ${SERVICE_STDOUT}
         ;;
         "stop")
-            serviceStop >> ${SERVICE_STDOUT}
+            serviceStop &> ${SERVICE_STDOUT}
         ;;
         "restart")
-            serviceRestart >> ${SERVICE_STDOUT}
+            serviceRestart &> ${SERVICE_STDOUT}
         ;;
         *) 
             echo "Usage: $0 restart|start|stop"
