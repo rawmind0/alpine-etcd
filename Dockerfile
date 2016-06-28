@@ -14,7 +14,7 @@ ENV PATH=${SERVICE_HOME}/bin:${PATH} \
 	SERVICE_URL=https://github.com/coreos/etcd/releases/download/v${SERVICE_VERSION} \
     SERVICE_RELEASE=etcd-v${SERVICE_VERSION}-linux-amd64
 
-RUN mkdir -p ${SERVICE_HOME}/data ${SERVICE_HOME}/logs ${SERVICE_HOME}/etc
+RUN mkdir -p ${SERVICE_HOME}/data ${SERVICE_HOME}/logs ${SERVICE_HOME}/etc \
     && curl -jksSL ${SERVICE_URL}/${SERVICE_RELEASE}.tar.gz | gunzip -c - | tar -xf - -C /opt && \
     && mv /opt/${SERVICE_RELEASE} ${SERVICE_HOME}/bin \
     && chmod +x ${SERVICE_HOME}/bin/etcd* \
