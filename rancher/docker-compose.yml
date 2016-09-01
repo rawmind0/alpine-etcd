@@ -1,6 +1,6 @@
 etcd:
   tty: true
-  image: rawmind/alpine-etcd:2.3.7-2
+  image: rawmind/alpine-etcd:2.3.7-3
   volumes_from:
     - etcd-volume
     - etcd-conf
@@ -17,7 +17,7 @@ etcd-conf:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
-  image: rawmind/rancher-etcd:2.3.7-2
+  image: rawmind/rancher-etcd:2.3.7-3
 etcd-volume:
   net: none
   labels:
@@ -25,12 +25,10 @@ etcd-volume:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   environment:
-    - SERVICE_USER=etcd
     - SERVICE_UID=10005
-    - SERVICE_GROUP=etcd 
     - SERVICE_GID=10005
     - SERVICE_VOLUME=${etcd_data_dir}
   volumes:
     - ${etcd_data_dir}
   volume_driver: local
-  image: rawmind/alpine-volume:0.0.1-1
+  image: rawmind/alpine-volume:0.0.2-1
