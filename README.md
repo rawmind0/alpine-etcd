@@ -1,3 +1,5 @@
+[![](https://images.microbadger.com/badges/image/rawmind/alpine-etcd.svg)](https://microbadger.com/images/rawmind/alpine-etcd "Get your own image badge on microbadger.com")
+
 alpine-etcd 
 ==============
 
@@ -11,7 +13,7 @@ docker build -t rawmind/alpine-etcd:<version> .
 
 ## Versions
 
-- `2.3.7-2` [(Dockerfile)](https://github.com/rawmind0/alpine-etcd/blob/2.3.7-2/Dockerfile)
+- `2.3.7-3` [(Dockerfile)](https://github.com/rawmind0/alpine-etcd/blob/2.3.7-3/Dockerfile)
 - `2.2.5-0` [(Dockerfile)](https://github.com/rawmind0/alpine-etcd/blob/2.2.5-0/Dockerfile)
 
 ## Configuration
