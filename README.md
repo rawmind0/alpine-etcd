@@ -13,7 +13,7 @@ docker build -t rawmind/alpine-etcd:<version> .
 
 ## Versions
 
-- `2.3.7-4` [(Dockerfile)](https://github.com/rawmind0/alpine-etcd/blob/2.3.7-4/Dockerfile)
+- `2.3.7-5` [(Dockerfile)](https://github.com/rawmind0/alpine-etcd/blob/2.3.7-5/Dockerfile)
 - `2.2.5-0` [(Dockerfile)](https://github.com/rawmind0/alpine-etcd/blob/2.2.5-0/Dockerfile)
 
 ## Configuration
