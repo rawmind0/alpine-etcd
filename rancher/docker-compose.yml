@@ -1,6 +1,6 @@
 etcd:
   tty: true
-  image: rawmind/alpine-etcd:2.3.7-4
+  image: rawmind/alpine-etcd:2.3.7-6
   volumes_from:
     - etcd-volume
     - etcd-conf
